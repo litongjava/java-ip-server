@@ -64,6 +64,11 @@ public class AioHttpServerJava8 {
           // 发送响应
           return;
         }
+        if ("/echo".equals(requestPath)) {
+          writeHttpResponse(clientChannel, 404, "text/plain", request);
+          // 发送响应
+          return;
+        }
 
         // 其他路径,返回404
         writeHttpResponse(clientChannel, 404, "text/plain", "404 Not Found");
@@ -81,6 +86,15 @@ public class AioHttpServerJava8 {
     // 解析请求，获取IP参数
     Map<String, String> requestMap = getRequestMap(request);
     String ip = requestMap.get("ip");
+
+    if (ip == null) {
+      try {
+        InetSocketAddress remoteAddress = (InetSocketAddress) clientChannel.getRemoteAddress();
+        ip = remoteAddress.getAddress().getHostAddress();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
 
     String body = null;
     if (ip != null && !ip.isEmpty()) {
