@@ -5,7 +5,7 @@
 
 ## 启动
 ```shell
-docker run -dit --name tio-boot-web-hello --restart=always --net=host \
+docker run -dit --name ip-sever --restart=always -p 10005:8080 \
 -v $(pwd):/app -w /app \
 -e TZ=Asia/Shanghai \
 -e LANG=C.UTF-8 \
@@ -17,7 +17,7 @@ java -jar java-ip-server-1.0.0.jar
 启动服务器后，通过以下请求查询 IP 属地信息：
 
 ```shell
-http://localhost:8080/ip?ip=66.75.89.81
+curl -v http://localhost:10005/ip?ip=66.75.89.81
 ```
 
 响应结果示例如下：
