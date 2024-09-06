@@ -24,17 +24,20 @@ public class AioHttpServerJava8 {
 
       // 使用非阻塞模式接受连接
       serverChannel.accept(null, new CompletionHandler<AsynchronousSocketChannel, Void>() {
+
         @Override
         public void completed(AsynchronousSocketChannel clientChannel, Void attachment) {
+          // 再次调用 accept()，以继续接受新连接
+          serverChannel.accept(null, this);
           if (clientChannel != null && clientChannel.isOpen()) {
             handleRequest(clientChannel);
           }
-          // 再次调用 accept()，以继续接受新连接
-          serverChannel.accept(null, this);
+
         }
 
         @Override
         public void failed(Throwable exc, Void attachment) {
+          serverChannel.accept(null, this);
           exc.printStackTrace();
         }
       });
