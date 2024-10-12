@@ -2,6 +2,7 @@
 
 ## 简介
 高性能、轻量级的 IP 查询解决方案.
+[gitee](https://gitee.com/ppnt/java-ip-server)|[github](https://github.com/litongjava/)
 
 [Java-IP-Server](https://tio-boot.litongjava.com/zh/16_aio/03.html) 是基于自研 AIO（异步 IO）HTTP 服务和 ip2region 封装的 IP 查询服务器。打包后总大小为 **4.30MB**（包含数据库），无需依赖第三方 HTTP 服务（如 Servlet、Tio-Boot）。它提供高效、轻量级的 IP 查询解决方案，适合快速集成 IP 归属地查询功能的应用场景，确保系统的稳定性和性能。
 
